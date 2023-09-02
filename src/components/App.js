@@ -22,11 +22,12 @@ const [ cate, setCate] = useState("")
     const task = TASKS.filter(task => { if( displayData !== "All"){
       return task.category === displayData} 
       else {
-        return "no thankyou"}
+        return task }
       })
-      console.log(task)
-    setCate(()=>displayData)
-    setData(()=>task)  
+
+      // console.log(displayData)
+      setData(()=>task)  
+      setCate(()=>displayData)
   
   }
 

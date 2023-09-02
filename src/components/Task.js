@@ -1,18 +1,18 @@
 import React from "react";
 
-function Task( { taskData , taskHandler}) {
+function Task( { text, category , taskHandler}) {
 
   function handleTasks(event){
     const value = event.target.value
     taskHandler(value)
 
   }
- 
+  
   return (
-        <div className="task" key={taskData.text}>
-          <div className="label">{taskData.category}</div>
-          <div className="text">{taskData.text}</div>
-          <button className="delete" onClick={handleTasks} value={taskData.text}>X</button>
+        <div className="task" key={text}>
+          <div className="label">{category}</div>
+          <div className="text">{text}</div>
+          <button className="delete" onClick={handleTasks} value={text}>X</button>
         </div>
   )
 }
