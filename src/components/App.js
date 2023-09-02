@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState} from "react";
 import CategoryFilter from "./CategoryFilter";
 import NewTaskForm from "./NewTaskForm";
 import TaskList from "./TaskList";
@@ -7,13 +7,42 @@ import { CATEGORIES, TASKS } from "../data";
 console.log("Here's the data you're working with");
 console.log({ CATEGORIES, TASKS });
 
-function App() {
+function App(){
+
+const [ data, setData ] = useState(TASKS)
+const [ cate, setCate] = useState("")
+  
+  function handleFilter(btndata){
+    const update = data.filter(item => item.text !== btndata)
+    setData(()=>update)
+  } 
+
+  function handleData(displayData){
+
+    const task = TASKS.filter(task => { if( displayData !== "All"){
+      return task.category === displayData} 
+      else {
+        return "no thankyou"}
+      })
+      console.log(task)
+    setCate(()=>displayData)
+    setData(()=>task)  
+  
+  }
+
+  function handleForm(newTask){
+    const newItems = [...data, newTask]
+    setData(()=> newItems.filter(item => item !== ""))
+    
+  }
+
+// console.log(data)
   return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter />
-      <NewTaskForm />
-      <TaskList />
+      <CategoryFilter categories={CATEGORIES} handleCate={handleData} catego={cate}/>
+      <NewTaskForm categories={CATEGORIES} onTaskFormSubmit={handleForm}/>
+      <TaskList tasks={data} handleList={handleFilter} />
     </div>
   );
 }
